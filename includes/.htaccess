@@ -1,0 +1,2 @@
+# Apache only: block direct HTTP access to internal files.
+Require all denied
