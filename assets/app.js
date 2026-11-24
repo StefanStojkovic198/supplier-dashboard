@@ -118,7 +118,7 @@
 
     function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),3400)}
 
-    function exportNotice(){toast('Ovo je samo HTML demo. Pravo generisanje izvoz.xml dodaćemo kroz PHP backend.');}
+    function exportNotice(){toast('Ovo je demonstracioni prikaz. Pravi izvoz.xml dodaćemo kroz PHP backend.');}
 
     document.getElementById('exportButton').addEventListener('click',exportNotice);
 
@@ -126,7 +126,7 @@
 
     document.getElementById('refreshButton').addEventListener('click',()=>{render();toast('Demo podaci su osveženi. U finalnoj verziji učitavaju se sa servera.')});
 
-    document.getElementById('helpButton').addEventListener('click',()=>toast('Interaktivni HTML koncept. Podaci su izmišljeni; XML obrada i export još nisu povezani.'));
+    document.getElementById('helpButton').addEventListener('click',()=>toast('Interaktivni demo koncept. Podaci su izmišljeni; XML obrada i izvoz još nisu povezani.'));
 
     const modal=document.getElementById('settingsOverlay');
 

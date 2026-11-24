@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="theme-color" content="#f6f8fc">
+  <meta name="theme-color" content="#0b1220">
 
   <meta name="description" content="Demo dizajna aplikacije za objedinjavanje ponuda dobavljača.">
 
@@ -20,7 +20,7 @@
 
 <body>
 
-  <!-- Samostalan HTML demo: svi podaci su izmišljeni, bez PHP-a i povezivanja sa stvarnim XML fajlovima. -->
+  <!-- Tamna tema demo dashboarda; XML obrada i poslovna logika biće povezane sa PHP backendom. -->
 
   <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
 
