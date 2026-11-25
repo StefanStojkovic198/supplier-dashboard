@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <proizvodi valuta="RSD">
   <proizvod>
+    <ean>8601003699271</ean>
+    <naziv>Anker PowerCore 10000 PD Redux - powerbank</naziv>
+    <kategorija>Powerbank</kategorija>
+    <brend>Anker</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>2</lager>
+    <nabavna_cena>2920.18</nabavna_cena>
+    <prodajna_cena>3504.22</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601003699271-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601003699271-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601003699271-3/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
     <ean>8601000685055</ean>
     <naziv>Auto punjac Baseus Superme 100W USB-C + USB-A</naziv>
     <kategorija>Adapteri</kategorija>
@@ -23,8 +39,8 @@
     <dobavljac>Gama Import d.o.o.</dobavljac>
     <lager>9</lager>
     <nabavna_cena>1720.00</nabavna_cena>
-    <prodajna_cena>2476.80</prodajna_cena>
-    <zarada>344.00</zarada>
+    <prodajna_cena>2064.00</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
       <slika>https://picsum.photos/seed/8601003562261-1/600/600</slika>
       <slika>https://picsum.photos/seed/8601003562261-2/600/600</slika>
@@ -32,17 +48,18 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601002329179</ean>
-    <naziv>Bezicna tastatura Logitech MX Keys S grafit US</naziv>
-    <kategorija>Tastature</kategorija>
-    <brend>Logitech</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>30</lager>
-    <nabavna_cena>11109.87</nabavna_cena>
-    <prodajna_cena>13998.43</prodajna_cena>
-    <zarada>555.49</zarada>
+    <ean>8601000959071</ean>
+    <naziv>Baseus Crystal Shine USB-A na Lightning 1.2m - kabl</naziv>
+    <kategorija>Kablovi</kategorija>
+    <brend>Baseus</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>8</lager>
+    <nabavna_cena>663.38</nabavna_cena>
+    <prodajna_cena>796.06</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601002329179-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601000959071-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601000959071-2/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -77,36 +94,6 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601002055153</ean>
-    <naziv>BEZICNI MIS HP 220 SILENT</naziv>
-    <kategorija>Racunarska oprema</kategorija>
-    <brend>HP</brend>
-    <dobavljac>Beta Trade d.o.o.</dobavljac>
-    <lager>15</lager>
-    <nabavna_cena>937.27</nabavna_cena>
-    <prodajna_cena>1203.46</prodajna_cena>
-    <zarada>65.61</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601002055153-1/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601001507110</ean>
-    <naziv>Bezicni mis Logitech M185 sivi</naziv>
-    <kategorija>Misevi</kategorija>
-    <brend>Logitech</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>8</lager>
-    <nabavna_cena>1090.00</nabavna_cena>
-    <prodajna_cena>1373.40</prodajna_cena>
-    <zarada>54.50</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601001507110-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601001507110-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601001507110-3/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
     <ean>8601001644129</ean>
     <naziv>Bezicni mis Logitech MX Master 3S grafit</naziv>
     <kategorija>Misevi</kategorija>
@@ -137,21 +124,6 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601004932360</ean>
-    <naziv>Bluetooth zvucnik JBL Flip 6 crni</naziv>
-    <kategorija>Zvucnici</kategorija>
-    <brend>JBL</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>0</lager>
-    <nabavna_cena>10666.63</nabavna_cena>
-    <prodajna_cena>13439.95</prodajna_cena>
-    <zarada>533.33</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601004932360-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601004932360-2/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
     <ean>8601004795354</ean>
     <naziv>Bluetooth zvucnik JBL Go 4 plavi</naziv>
     <kategorija>Zvucnici</kategorija>
@@ -167,32 +139,34 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601005069379</ean>
-    <naziv>Bluetooth zvucnik Xiaomi Sound Outdoor 30W crni</naziv>
-    <kategorija>Zvucnici</kategorija>
-    <brend>Xiaomi</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>0</lager>
-    <nabavna_cena>4400.00</nabavna_cena>
-    <prodajna_cena>5544.00</prodajna_cena>
-    <zarada>220.00</zarada>
+    <ean>8601004521335</ean>
+    <naziv>flash Kingston DataTraveler Exodia 128GB - usb</naziv>
+    <kategorija>USB flash</kategorija>
+    <brend>Kingston</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>20</lager>
+    <nabavna_cena>928.15</nabavna_cena>
+    <prodajna_cena>1113.78</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601005069379-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601005069379-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601004521335-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601004521335-2/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601006576487</ean>
-    <naziv>Futrola Spigen Ultra Hybrid za iPhone 16 providna</naziv>
-    <kategorija>Futrole</kategorija>
-    <brend>Spigen</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>15</lager>
-    <nabavna_cena>2083.56</nabavna_cena>
-    <prodajna_cena>2625.29</prodajna_cena>
-    <zarada>104.18</zarada>
+    <ean>8601004658345</ean>
+    <naziv>flash Samsung BAR Plus 256GB titan siva - usb</naziv>
+    <kategorija>USB flash</kategorija>
+    <brend>Samsung</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>2</lager>
+    <nabavna_cena>3005.03</nabavna_cena>
+    <prodajna_cena>3606.04</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601006576487-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601004658345-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601004658345-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601004658345-3/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -211,63 +185,32 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601000959071</ean>
-    <naziv>KABL BASEUS CRYSTAL SHINE USB-A NA LIGHTNING 1.2M</naziv>
-    <kategorija>Kablovi</kategorija>
-    <brend>Baseus</brend>
-    <dobavljac>Beta Trade d.o.o.</dobavljac>
-    <lager>12</lager>
-    <nabavna_cena>658.53</nabavna_cena>
-    <prodajna_cena>845.56</prodajna_cena>
-    <zarada>46.10</zarada>
+    <ean>8601005206385</ean>
+    <naziv>Genius SP-HF180 USB drvo - zvucnici</naziv>
+    <kategorija>Zvucnici</kategorija>
+    <brend>Genius</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>5</lager>
+    <nabavna_cena>1402.07</nabavna_cena>
+    <prodajna_cena>1682.48</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601000959071-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601005206385-1/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601001233095</ean>
-    <naziv>Kabl Orico HDMI 2.1 8K 2m</naziv>
-    <kategorija>Kablovi</kategorija>
-    <brend>Orico</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>0</lager>
-    <nabavna_cena>1244.02</nabavna_cena>
-    <prodajna_cena>1567.46</prodajna_cena>
-    <zarada>62.20</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601001233095-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601001233095-2/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601001096089</ean>
-    <naziv>KABL SAMSUNG EP-DN975 USB-C NA USB-C 5A 1M</naziv>
-    <kategorija>Kablovi</kategorija>
-    <brend>Samsung</brend>
-    <dobavljac>Beta Trade d.o.o.</dobavljac>
-    <lager>15</lager>
-    <nabavna_cena>1135.87</nabavna_cena>
-    <prodajna_cena>1458.46</prodajna_cena>
-    <zarada>79.51</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601001096089-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601001096089-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601001096089-3/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601001370103</ean>
-    <naziv>Kabl Ugreen DisplayPort 1.4 8K 2m</naziv>
-    <kategorija>Kablovi</kategorija>
+    <ean>8601006850501</ean>
+    <naziv>hub Ugreen 6 u 1 HDMI 4K USB 3.0 SD - usb-c</naziv>
+    <kategorija>Punjaci</kategorija>
     <brend>Ugreen</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>15</lager>
-    <nabavna_cena>1532.19</nabavna_cena>
-    <prodajna_cena>1930.56</prodajna_cena>
-    <zarada>76.61</zarada>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>20</lager>
+    <nabavna_cena>3350.18</nabavna_cena>
+    <prodajna_cena>4020.22</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601001370103-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601001370103-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601006850501-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601006850501-2/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -287,6 +230,68 @@
     </slike>
   </proizvod>
   <proizvod>
+    <ean>8601005480402</ean>
+    <naziv>kamera Logitech C920 HD Pro - web</naziv>
+    <kategorija>Web kamere</kategorija>
+    <brend>Logitech</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>60</lager>
+    <nabavna_cena>6550.62</nabavna_cena>
+    <prodajna_cena>7860.74</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601005480402-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601005480402-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601005480402-3/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601005617419</ean>
+    <naziv>kamera Trust Tolar 1080p - web</naziv>
+    <kategorija>Web kamere</kategorija>
+    <brend>Trust</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>45</lager>
+    <nabavna_cena>2611.59</nabavna_cena>
+    <prodajna_cena>3133.91</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601005617419-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601005617419-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601005617419-3/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601004247310</ean>
+    <naziv>kartica Kingston Canvas Select Plus 64GB - memorijska</naziv>
+    <kategorija>Memorijske kartice</kategorija>
+    <brend>Kingston</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>20</lager>
+    <nabavna_cena>710.20</nabavna_cena>
+    <prodajna_cena>852.24</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601004247310-1/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601004110300</ean>
+    <naziv>kartica Samsung EVO Plus microSDXC 256GB - memorijska</naziv>
+    <kategorija>Memorijske kartice</kategorija>
+    <brend>Samsung</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>15</lager>
+    <nabavna_cena>2290.00</nabavna_cena>
+    <prodajna_cena>2748.00</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601004110300-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601004110300-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601004110300-3/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
     <ean>8601003973296</ean>
     <naziv>kartica SanDisk Ultra microSDXC 128GB A1 + adapter - memorijska</naziv>
     <kategorija>Memorijske kartice</kategorija>
@@ -294,11 +299,25 @@
     <dobavljac>Gama Import d.o.o.</dobavljac>
     <lager>0</lager>
     <nabavna_cena>1393.06</nabavna_cena>
-    <prodajna_cena>2006.00</prodajna_cena>
-    <zarada>278.61</zarada>
+    <prodajna_cena>1671.67</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
       <slika>https://picsum.photos/seed/8601003973296-1/600/600</slika>
       <slika>https://picsum.photos/seed/8601003973296-2/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601002192162</ean>
+    <naziv>Logitech K120 USB SRB - tastatura</naziv>
+    <kategorija>Tastature</kategorija>
+    <brend>Logitech</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>30</lager>
+    <nabavna_cena>1151.31</nabavna_cena>
+    <prodajna_cena>1381.57</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601002192162-1/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -317,32 +336,18 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601004247310</ean>
-    <naziv>Memorijska kartica Kingston Canvas Select Plus 64GB</naziv>
-    <kategorija>Memorijske kartice</kategorija>
-    <brend>Kingston</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>100</lager>
-    <nabavna_cena>685.48</nabavna_cena>
-    <prodajna_cena>863.70</prodajna_cena>
-    <zarada>34.27</zarada>
+    <ean>8601002055153</ean>
+    <naziv>mis HP 220 Silent - bezicni</naziv>
+    <kategorija>Misevi</kategorija>
+    <brend>HP</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>0</lager>
+    <nabavna_cena>944.19</nabavna_cena>
+    <prodajna_cena>1133.03</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601004247310-1/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601004110300</ean>
-    <naziv>Memorijska kartica Samsung EVO Plus microSDXC 256GB</naziv>
-    <kategorija>Memorijske kartice</kategorija>
-    <brend>Samsung</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>20</lager>
-    <nabavna_cena>2450.00</nabavna_cena>
-    <prodajna_cena>3087.00</prodajna_cena>
-    <zarada>122.50</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601004110300-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601004110300-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601002055153-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601002055153-2/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -361,50 +366,32 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601001918145</ean>
-    <naziv>MIS RAZER DEATHADDER ESSENTIAL CRNI</naziv>
-    <kategorija>Racunarska oprema</kategorija>
-    <brend>Razer</brend>
-    <dobavljac>Beta Trade d.o.o.</dobavljac>
-    <lager>20</lager>
-    <nabavna_cena>2232.45</nabavna_cena>
-    <prodajna_cena>2866.46</prodajna_cena>
-    <zarada>156.27</zarada>
+    <ean>8601001507110</ean>
+    <naziv>mis Logitech M185 sivi - bezicni</naziv>
+    <kategorija>Misevi</kategorija>
+    <brend>Logitech</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>7</lager>
+    <nabavna_cena>1120.00</nabavna_cena>
+    <prodajna_cena>1344.00</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601001918145-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601001918145-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601001918145-3/600/600</slika>
+      <slika>https://picsum.photos/seed/8601001507110-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601001507110-2/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601003699271</ean>
-    <naziv>POWERBANK ANKER POWERCORE 10000 PD REDUX</naziv>
-    <kategorija>Powerbank</kategorija>
-    <brend>Anker</brend>
-    <dobavljac>Beta Trade d.o.o.</dobavljac>
+    <ean>8601001233095</ean>
+    <naziv>Orico HDMI 2.1 8K 2m - kabl</naziv>
+    <kategorija>Kablovi</kategorija>
+    <brend>Orico</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
     <lager>5</lager>
-    <nabavna_cena>2795.49</nabavna_cena>
-    <prodajna_cena>3589.40</prodajna_cena>
-    <zarada>195.68</zarada>
+    <nabavna_cena>1251.51</nabavna_cena>
+    <prodajna_cena>1501.81</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601003699271-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601003699271-2/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601003836287</ean>
-    <naziv>POWERBANK UGREEN 25000MAH 145W</naziv>
-    <kategorija>Powerbank</kategorija>
-    <brend>Ugreen</brend>
-    <dobavljac>Beta Trade d.o.o.</dobavljac>
-    <lager>0</lager>
-    <nabavna_cena>6762.62</nabavna_cena>
-    <prodajna_cena>8683.20</prodajna_cena>
-    <zarada>473.38</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601003836287-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601003836287-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601003836287-3/600/600</slika>
+      <slika>https://picsum.photos/seed/8601001233095-1/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -424,6 +411,65 @@
     </slike>
   </proizvod>
   <proizvod>
+    <ean>8601000274020</ean>
+    <naziv>punjac Samsung EP-T2510 25W USB-C crni - zidni</naziv>
+    <kategorija>Punjaci</kategorija>
+    <brend>Samsung</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>0</lager>
+    <nabavna_cena>1545.05</nabavna_cena>
+    <prodajna_cena>1854.06</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601000274020-1/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601000548046</ean>
+    <naziv>punjac Ugreen Nexode 65W GaN 3 porta - zidni</naziv>
+    <kategorija>Punjaci</kategorija>
+    <brend>Ugreen</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>6</lager>
+    <nabavna_cena>4080.00</nabavna_cena>
+    <prodajna_cena>4896.00</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601000548046-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601000548046-2/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601000411036</ean>
+    <naziv>punjac Xiaomi Mi 33W Wall Charger Type-A + Type-C - zidni</naziv>
+    <kategorija>Punjaci</kategorija>
+    <brend>Xiaomi</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>15</lager>
+    <nabavna_cena>1597.61</nabavna_cena>
+    <prodajna_cena>1917.13</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601000411036-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601000411036-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601000411036-3/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601001918145</ean>
+    <naziv>Razer DeathAdder Essential crni - mis</naziv>
+    <kategorija>Misevi</kategorija>
+    <brend>Razer</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>30</lager>
+    <nabavna_cena>2210.51</nabavna_cena>
+    <prodajna_cena>2652.61</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601001918145-1/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
     <ean>8601006439478</ean>
     <naziv>Ruter Mercusys MR70X AX1800 Wi-Fi 6</naziv>
     <kategorija>Ruteri</kategorija>
@@ -440,18 +486,17 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601006165452</ean>
-    <naziv>Ruter TP-Link Archer C6 AC1200</naziv>
-    <kategorija>Ruteri</kategorija>
-    <brend>TP-Link</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>100</lager>
-    <nabavna_cena>4276.31</nabavna_cena>
-    <prodajna_cena>5388.16</prodajna_cena>
-    <zarada>213.82</zarada>
+    <ean>8601001096089</ean>
+    <naziv>Samsung EP-DN975 USB-C na USB-C 5A 1m - kabl</naziv>
+    <kategorija>Kablovi</kategorija>
+    <brend>Samsung</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>60</lager>
+    <nabavna_cena>1154.89</nabavna_cena>
+    <prodajna_cena>1385.87</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601006165452-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601006165452-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601001096089-1/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -462,8 +507,8 @@
     <dobavljac>Gama Import d.o.o.</dobavljac>
     <lager>0</lager>
     <nabavna_cena>7031.84</nabavna_cena>
-    <prodajna_cena>10125.85</prodajna_cena>
-    <zarada>1406.37</zarada>
+    <prodajna_cena>8438.21</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
       <slika>https://picsum.photos/seed/8601003151236-1/600/600</slika>
       <slika>https://picsum.photos/seed/8601003151236-2/600/600</slika>
@@ -484,6 +529,21 @@
       <slika>https://picsum.photos/seed/8601003014227-1/600/600</slika>
       <slika>https://picsum.photos/seed/8601003014227-2/600/600</slika>
       <slika>https://picsum.photos/seed/8601003014227-3/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601006576487</ean>
+    <naziv>Spigen Ultra Hybrid za iPhone 16 providna - futrola</naziv>
+    <kategorija>Futrole</kategorija>
+    <brend>Spigen</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>5</lager>
+    <nabavna_cena>1896.83</nabavna_cena>
+    <prodajna_cena>2276.20</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601006576487-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601006576487-2/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -549,50 +609,62 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601002192162</ean>
-    <naziv>Tastatura Logitech K120 USB SRB</naziv>
+    <ean>8601002329179</ean>
+    <naziv>tastatura Logitech MX Keys S grafit US - bezicna</naziv>
     <kategorija>Tastature</kategorija>
     <brend>Logitech</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
     <lager>0</lager>
-    <nabavna_cena>1096.71</nabavna_cena>
-    <prodajna_cena>1381.86</prodajna_cena>
-    <zarada>54.84</zarada>
+    <nabavna_cena>10755.07</nabavna_cena>
+    <prodajna_cena>12906.08</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601002192162-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601002192162-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601002192162-3/600/600</slika>
+      <slika>https://picsum.photos/seed/8601002329179-1/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601004521335</ean>
-    <naziv>USB flash Kingston DataTraveler Exodia 128GB</naziv>
-    <kategorija>USB flash</kategorija>
-    <brend>Kingston</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>0</lager>
-    <nabavna_cena>1031.77</nabavna_cena>
-    <prodajna_cena>1300.03</prodajna_cena>
-    <zarada>51.59</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601004521335-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601004521335-2/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601004658345</ean>
-    <naziv>USB flash Samsung BAR Plus 256GB titan siva</naziv>
-    <kategorija>USB flash</kategorija>
-    <brend>Samsung</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
+    <ean>8601006165452</ean>
+    <naziv>TP-Link Archer C6 AC1200 - ruter</naziv>
+    <kategorija>Ruteri</kategorija>
+    <brend>TP-Link</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
     <lager>30</lager>
-    <nabavna_cena>2993.92</nabavna_cena>
-    <prodajna_cena>3772.34</prodajna_cena>
-    <zarada>149.70</zarada>
+    <nabavna_cena>4251.70</nabavna_cena>
+    <prodajna_cena>5102.04</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601004658345-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601004658345-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601004658345-3/600/600</slika>
+      <slika>https://picsum.photos/seed/8601006165452-1/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601003836287</ean>
+    <naziv>Ugreen 25000mAh 145W - powerbank</naziv>
+    <kategorija>Powerbank</kategorija>
+    <brend>Ugreen</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>30</lager>
+    <nabavna_cena>6965.32</nabavna_cena>
+    <prodajna_cena>8358.38</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601003836287-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601003836287-2/600/600</slika>
+      <slika>https://picsum.photos/seed/8601003836287-3/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601001370103</ean>
+    <naziv>Ugreen DisplayPort 1.4 8K 2m - kabl</naziv>
+    <kategorija>Kablovi</kategorija>
+    <brend>Ugreen</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>8</lager>
+    <nabavna_cena>1488.25</nabavna_cena>
+    <prodajna_cena>1785.90</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601001370103-1/600/600</slika>
+      <slika>https://picsum.photos/seed/8601001370103-2/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -611,21 +683,6 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601006850501</ean>
-    <naziv>USB-C hub Ugreen 6 u 1 HDMI 4K USB 3.0 SD</naziv>
-    <kategorija>Adapteri</kategorija>
-    <brend>Ugreen</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>0</lager>
-    <nabavna_cena>3445.96</nabavna_cena>
-    <prodajna_cena>4341.91</prodajna_cena>
-    <zarada>172.30</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601006850501-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601006850501-2/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
     <ean>8601005343394</ean>
     <naziv>WEB KAMERA LOGITECH C270 HD</naziv>
     <kategorija>Web kamere</kategorija>
@@ -638,37 +695,6 @@
     <slike>
       <slika>https://picsum.photos/seed/8601005343394-1/600/600</slika>
       <slika>https://picsum.photos/seed/8601005343394-2/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601005480402</ean>
-    <naziv>WEB KAMERA LOGITECH C920 HD PRO</naziv>
-    <kategorija>Web kamere</kategorija>
-    <brend>Logitech</brend>
-    <dobavljac>Beta Trade d.o.o.</dobavljac>
-    <lager>60</lager>
-    <nabavna_cena>6631.17</nabavna_cena>
-    <prodajna_cena>8514.42</prodajna_cena>
-    <zarada>464.18</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601005480402-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601005480402-2/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601005617419</ean>
-    <naziv>Web kamera Trust Tolar 1080p</naziv>
-    <kategorija>Web kamere</kategorija>
-    <brend>Trust</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>0</lager>
-    <nabavna_cena>2608.41</nabavna_cena>
-    <prodajna_cena>3286.60</prodajna_cena>
-    <zarada>130.42</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601005617419-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601005617419-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601005617419-3/600/600</slika>
     </slike>
   </proizvod>
   <proizvod>
@@ -732,66 +758,31 @@
     </slike>
   </proizvod>
   <proizvod>
-    <ean>8601000274020</ean>
-    <naziv>ZIDNI PUNJAC SAMSUNG EP-T2510 25W USB-C CRNI</naziv>
-    <kategorija>Adapteri</kategorija>
-    <brend>Samsung</brend>
-    <dobavljac>Beta Trade d.o.o.</dobavljac>
-    <lager>45</lager>
-    <nabavna_cena>1531.28</nabavna_cena>
-    <prodajna_cena>1966.16</prodajna_cena>
-    <zarada>107.19</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601000274020-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601000274020-2/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601000548046</ean>
-    <naziv>Zidni punjac Ugreen Nexode 65W GaN 3 porta</naziv>
-    <kategorija>Adapteri</kategorija>
-    <brend>Ugreen</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>12</lager>
-    <nabavna_cena>3950.00</nabavna_cena>
-    <prodajna_cena>4977.00</prodajna_cena>
-    <zarada>197.50</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601000548046-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601000548046-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601000548046-3/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601000411036</ean>
-    <naziv>Zidni punjac Xiaomi Mi 33W Wall Charger Type-A + Type-C</naziv>
-    <kategorija>Adapteri</kategorija>
-    <brend>Xiaomi</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>5</lager>
-    <nabavna_cena>1642.14</nabavna_cena>
-    <prodajna_cena>2069.10</prodajna_cena>
-    <zarada>82.11</zarada>
-    <slike>
-      <slika>https://picsum.photos/seed/8601000411036-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601000411036-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601000411036-3/600/600</slika>
-    </slike>
-  </proizvod>
-  <proizvod>
-    <ean>8601005206385</ean>
-    <naziv>Zvucnici Genius SP-HF180 USB drvo</naziv>
+    <ean>8601004932360</ean>
+    <naziv>zvucnik JBL Flip 6 crni - bluetooth</naziv>
     <kategorija>Zvucnici</kategorija>
-    <brend>Genius</brend>
-    <dobavljac>Alfa Distribucija d.o.o.</dobavljac>
-    <lager>45</lager>
-    <nabavna_cena>1387.78</nabavna_cena>
-    <prodajna_cena>1748.60</prodajna_cena>
-    <zarada>69.39</zarada>
+    <brend>JBL</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>15</lager>
+    <nabavna_cena>10730.30</nabavna_cena>
+    <prodajna_cena>12876.36</prodajna_cena>
+    <zarada>0.00</zarada>
     <slike>
-      <slika>https://picsum.photos/seed/8601005206385-1/600/600</slika>
-      <slika>https://picsum.photos/seed/8601005206385-2/600/600</slika>
-      <slika>https://picsum.photos/seed/8601005206385-3/600/600</slika>
+      <slika>https://picsum.photos/seed/8601004932360-1/600/600</slika>
+    </slike>
+  </proizvod>
+  <proizvod>
+    <ean>8601005069379</ean>
+    <naziv>zvucnik Xiaomi Sound Outdoor 30W crni - bluetooth</naziv>
+    <kategorija>Zvucnici</kategorija>
+    <brend>Xiaomi</brend>
+    <dobavljac>Gama Import d.o.o.</dobavljac>
+    <lager>0</lager>
+    <nabavna_cena>4380.00</nabavna_cena>
+    <prodajna_cena>5256.00</prodajna_cena>
+    <zarada>0.00</zarada>
+    <slike>
+      <slika>https://picsum.photos/seed/8601005069379-1/600/600</slika>
     </slike>
   </proizvod>
 </proizvodi>
