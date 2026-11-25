@@ -2,7 +2,7 @@
     "margins": {
         "alfa": 5,
         "beta": 7,
-        "gama": 0
+        "gama": 20
     },
     "vat": 20
 }

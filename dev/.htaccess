@@ -1,0 +1,2 @@
+# Test pages must not be reachable through HTTP, even on localhost.
+Require all denied

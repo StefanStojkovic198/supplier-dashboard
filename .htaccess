@@ -1,0 +1,14 @@
+# SupplyHub — Apache 2.4; root of supplier-dashboard/
+# Keep this file with the project. It protects metadata and disables listings.
+Options -Indexes
+
+<FilesMatch "(^\.|~$|\.(?:bak|old|orig|log|sql|ini|env|md|sh|py|zip)$)">
+    Require all denied
+</FilesMatch>
+
+# Extra safeguard against accidental exposure of Git/dev directories.
+# Never upload .git, dev/ or tests/ when deploying production.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?:\.git|dev|tests)(?:/|$) - [F,L,NC]
+</IfModule>
