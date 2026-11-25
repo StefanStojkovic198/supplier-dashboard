@@ -1,2 +1,5 @@
 .DS_Store
 **/.DS_Store
+/config/.settings.lock
+/config/.supplyhub-tmp-*
+/data/.supplyhub-tmp-*

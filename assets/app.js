@@ -10,7 +10,10 @@ try {
 }
 
 const catalog = Array.isArray(payload.products) ? payload.products : [];
-const rates = payload.rates || null;
+let rates = payload.rates || null;
+let settingsVersion = payload.version || null;
+const csrfToken = payload.csrf || null;
+const requiresPassword = Boolean(payload.requiresPassword);
 const serverError = payload.error || null;
 const names = {
   alfa: 'Alfa Distribucija',
@@ -152,8 +155,25 @@ document.getElementById('sidebarExport').addEventListener('click', downloadXml);
 document.getElementById('refreshButton').addEventListener('click', () => window.location.reload());
 document.getElementById('helpButton').addEventListener('click', () => toast('Prikaz iz data/izvoz.xml. Obračun i izbor dobavljača obavljeni su na PHP serveru.'));
 
-// Podešavanja su privremeno samo za pregled. Serversko snimanje dolazi u sledećoj fazi.
+// Stvarni POST ka PHP serveru: nema izračunavanja cena u JavaScript-u.
 const modal = document.getElementById('settingsOverlay');
+const settingsForm = document.getElementById('settingsForm');
+const settingsError = document.getElementById('settingsError');
+const settingsSave = document.getElementById('saveSettings');
+const settingsSaveLabel = document.getElementById('saveSettingsLabel');
+const adminPasswordRow = document.getElementById('adminPasswordRow');
+const adminPassword = document.getElementById('adminPassword');
+adminPasswordRow.hidden = !requiresPassword;
+adminPassword.required = requiresPassword;
+
+function settingsShowError(message) {
+  settingsError.textContent = message;
+  settingsError.hidden = false;
+}
+function settingsClearError() {
+  settingsError.hidden = true;
+  settingsError.textContent = '';
+}
 function openSettings() {
   if (rates) {
     document.getElementById('marginAlfa').value = rates.margins.alfa;
@@ -161,17 +181,78 @@ function openSettings() {
     document.getElementById('marginGama').value = rates.margins.gama;
     document.getElementById('vatRate').value = rates.vat;
   }
+  adminPassword.value = '';
+  settingsClearError();
   modal.classList.add('show');
   document.getElementById('closeSettings').focus();
   closeMenu();
 }
-function closeSettings() { modal.classList.remove('show'); }
+function closeSettings() {
+  if (settingsSave.disabled) return;
+  modal.classList.remove('show');
+  adminPassword.value = '';
+}
+function settingsBusy(busy) {
+  settingsSave.disabled = busy;
+  document.getElementById('cancelSettings').disabled = busy;
+  document.getElementById('closeSettings').disabled = busy;
+  settingsForm.querySelectorAll('input').forEach(input => { input.disabled = busy; });
+  settingsSaveLabel.textContent = busy ? 'Obrada na serveru…' : 'Sačuvaj i preračunaj';
+}
+
 document.getElementById('sidebarSettings').addEventListener('click', openSettings);
 document.getElementById('closeSettings').addEventListener('click', closeSettings);
 document.getElementById('cancelSettings').addEventListener('click', closeSettings);
-document.getElementById('settingsForm').addEventListener('submit', e => e.preventDefault());
 modal.addEventListener('click', e => { if (e.target === modal) closeSettings(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSettings(); closeMenu(); } });
+
+settingsForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  settingsClearError();
+  if (serverError || !rates || !csrfToken || !settingsVersion) {
+    settingsShowError('Katalog ili konfiguracija nisu spremni. Osveži stranicu.');
+    return;
+  }
+  if (!settingsForm.reportValidity()) return;
+  const nextRates = {
+    margins: {
+      alfa: Number(document.getElementById('marginAlfa').value),
+      beta: Number(document.getElementById('marginBeta').value),
+      gama: Number(document.getElementById('marginGama').value)
+    },
+    vat: Number(document.getElementById('vatRate').value)
+  };
+  settingsBusy(true);
+  try {
+    const response = await fetch('save-settings.php', {
+      method: 'POST',
+      credentials: 'same-origin',
+      cache: 'no-store',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ ...nextRates, csrf: csrfToken, version: settingsVersion, password: adminPassword.value })
+    });
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      throw new Error(data.error || `Greška servera (${response.status}).`);
+    }
+    if (!Array.isArray(data.products) || !data.rates || !data.version) {
+      throw new Error('Server nije vratio kompletan rezultat. Osveži stranicu.');
+    }
+    // Zamenjujemo katalog stvarnim server rezultatom, uz očuvanje pretrage i filtera.
+    catalog.splice(0, catalog.length, ...data.products);
+    rates = data.rates;
+    settingsVersion = data.version;
+    state.page = 1;
+    render();
+    settingsBusy(false);
+    closeSettings();
+    toast(`Sačuvano! Izvoz.xml regenerisan: ${number(data.count)} proizvoda.`);
+  } catch (error) {
+    settingsShowError(error instanceof Error ? error.message : 'Nije moguće sačuvati podešavanja.');
+  } finally {
+    settingsBusy(false);
+  }
+});
 
 const sidebar = document.getElementById('sidebar');
 const mobileOverlay = document.getElementById('mobileOverlay');

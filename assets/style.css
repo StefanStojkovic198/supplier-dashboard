@@ -345,3 +345,11 @@ h1 { margin: 0; color: #f1f6ff; font-size: clamp(25px, 2.3vw, 34px); font-weight
   .products td:nth-child(3) { border-top: 1px solid #31435d !important; padding-top: 12px !important; }
   .products .prod-title { max-width: none; font-size: 12px; }
 }
+
+/* Korak 15: serverska podešavanja, bez promene ostalih stilova dashboarda. */
+.settings-error { margin-top: 16px; padding: 12px 14px; color: #ffd5db; background: #3d2533; border: 1px solid #a85d70; border-radius: 10px; font-size: 12px; line-height: 1.6; }
+.settings-error[hidden], .field-row[hidden] { display: none !important; }
+.settings-help { margin-top: 15px; color: #92abc9; line-height: 1.6; font-size: 11px; }
+.settings-help code { overflow-wrap: anywhere; color: #bdd8ff; }
+.modal .btn:disabled { opacity: .6; cursor: progress; }
+.modal .field-row input:disabled { opacity: .7; }

@@ -3,6 +3,13 @@
 declare(strict_types=1);
 require_once __DIR__ . '/includes/catalog.php';
 require_once __DIR__ . '/includes/pricing.php';
+require_once __DIR__ . '/includes/settings.php';
+
+supplyhub_start_settings_session();
+header('Cache-Control: no-store, private');
+$csrfToken = supplyhub_csrf_token();
+$requiresPassword = !supplyhub_is_local_request();
+$settingsVersion = null;
 
 $catalogError = null;
 $catalogProducts = [];
@@ -10,6 +17,11 @@ $publicRates = null;
 try {
     $catalogProducts = supplyhub_read_export_catalog(__DIR__ . '/data/izvoz.xml');
     $pricingSettings = supplyhub_load_pricing_config(__DIR__ . '/config/settings.json');
+    $settingsBytes = file_get_contents(__DIR__ . '/config/settings.json');
+    if (!is_string($settingsBytes)) {
+        throw new RuntimeException('Podešavanja nisu dostupna.');
+    }
+    $settingsVersion = hash('sha256', $settingsBytes);
     $publicRates = [
         'margins' => [
             'alfa' => $pricingSettings['margins']['alfa'] / 100,
@@ -23,7 +35,8 @@ try {
 }
 
 $payload = json_encode(
-    ['products' => $catalogProducts, 'rates' => $publicRates, 'error' => $catalogError],
+    ['products' => $catalogProducts, 'rates' => $publicRates, 'error' => $catalogError,
+     'csrf' => $csrfToken, 'version' => $settingsVersion, 'requiresPassword' => $requiresPassword],
     JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR
 );
 ?>
@@ -180,7 +193,7 @@ $payload = json_encode(
 
             <section class="panel side-panel" id="suppliersSection"><h2 class="side-title">Pregled dobavljača</h2><p class="side-desc">Zastupljenost u objedinjenom katalogu.</p><div id="supplierDistribution" class="supplier-list"></div><div class="supplier-foot"><span>Ukupno dobavljača</span><strong id="supplierFootCount">— aktivna</strong></div></section>
 
-            <section class="panel side-panel formula-panel"><div class="formula-icon"><svg class="icon"><use href="#i-calculator"/></svg></div><h2 class="side-title">Pametan obračun cena</h2><p class="side-desc">Prodajna cena se formira automatski na osnovu marže dobavljača i PDV-a.</p><div class="formula-rule"><strong>Nabavna cena × (1 + marža) × (1 + PDV)</strong><small>Najpovoljnija prodajna ponuda po EAN-u</small></div><div class="formula-note">Marže i PDV su iz server konfiguracije. Njihovu izmenu kroz aplikaciju dodajemo u sledećem koraku.</div></section>
+            <section class="panel side-panel formula-panel"><div class="formula-icon"><svg class="icon"><use href="#i-calculator"/></svg></div><h2 class="side-title">Pametan obračun cena</h2><p class="side-desc">Prodajna cena se formira automatski na osnovu marže dobavljača i PDV-a.</p><div class="formula-rule"><strong>Nabavna cena × (1 + marža) × (1 + PDV)</strong><small>Najpovoljnija prodajna ponuda po EAN-u</small></div><div class="formula-note">Marže i PDV čuvaju se na serveru. Promena automatski ažurira cene, dobavljače i XML izvoz.</div></section>
 
           </div>
 
@@ -196,7 +209,22 @@ $payload = json_encode(
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <div class="modal-overlay" id="settingsOverlay" role="presentation"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="modal-title-row"><h2 id="settingsTitle">Podešavanja obračuna</h2><button id="closeSettings" class="circle-btn" aria-label="Zatvori"><svg class="icon"><use href="#i-x"/></svg></button></div><p>Trenutne marže i PDV učitavaju se sa servera. U sledećoj fazi dodaćemo bezbedno menjanje i ponovno generisanje XML-a.</p><form id="settingsForm"><div class="field-row"><label for="marginAlfa">Alfa Distribucija — marža (%)</label><input id="marginAlfa" type="number" min="0" max="100" step="0.1" value="5" readonly></div><div class="field-row"><label for="marginBeta">Beta Trade — marža (%)</label><input id="marginBeta" type="number" min="0" max="100" step="0.1" value="7" readonly></div><div class="field-row"><label for="marginGama">Gama Import — marža (%)</label><input id="marginGama" type="number" min="0" max="100" step="0.1" value="0" readonly></div><div class="field-row"><label for="vatRate">PDV (%)</label><input id="vatRate" type="number" min="0" max="100" step="0.1" value="20" readonly></div><div class="modal-actions"><button type="button" class="btn btn-primary" id="cancelSettings">Zatvori</button></div></form></div></div>
+  <div class="modal-overlay" id="settingsOverlay" role="presentation">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <div class="modal-title-row"><h2 id="settingsTitle">Podešavanja obračuna</h2><button id="closeSettings" class="circle-btn" aria-label="Zatvori"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <p>Promene se čuvaju na PHP serveru. Aplikacija će ponovo obračunati sve ponude, izabrati najpovoljnije dobavljače i regenerisati <strong>izvoz.xml</strong>.</p>
+      <form id="settingsForm">
+        <div class="field-row"><label for="marginAlfa">Alfa Distribucija — marža (%)</label><input id="marginAlfa" type="number" min="0" max="100" step="0.01" value="5" required></div>
+        <div class="field-row"><label for="marginBeta">Beta Trade — marža (%)</label><input id="marginBeta" type="number" min="0" max="100" step="0.01" value="7" required></div>
+        <div class="field-row"><label for="marginGama">Gama Import — marža (%)</label><input id="marginGama" type="number" min="0" max="100" step="0.01" value="0" required></div>
+        <div class="field-row"><label for="vatRate">PDV (%)</label><input id="vatRate" type="number" min="0" max="100" step="0.01" value="20" required></div>
+        <div id="adminPasswordRow" class="field-row" hidden><label for="adminPassword">Admin lozinka</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Za javni server"></div>
+        <div id="settingsError" class="settings-error" role="alert" hidden></div>
+        <div class="settings-help">Na MAMP localhost-u menjanje je dozvoljeno samo lokalno. Na javnom serveru potrebni su HTTPS i <code>SUPPLYHUB_ADMIN_PASSWORD</code> (server promenljiva, nije deo Gita).</div>
+        <div class="modal-actions"><button type="button" class="btn" id="cancelSettings">Otkaži</button><button type="submit" class="btn btn-primary" id="saveSettings"><svg class="icon"><use href="#i-check"/></svg><span id="saveSettingsLabel">Sačuvaj i preračunaj</span></button></div>
+      </form>
+    </div>
+  </div>
 
   <script type="application/json" id="catalogPayload"><?= $payload ?></script>
   <script src="assets/app.js" defer></script>
