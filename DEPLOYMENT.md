@@ -1,43 +1,52 @@
-# SupplyHub — bezbednosna provera i postavljanje online
+# SupplyHub — postavljanje i provera aplikacije
 
-## 1. Pre hostinga: lokalni test
+Ovaj dokument opisuje zahteve za pokretanje SupplyHub-a na PHP hostingu i osnovne provere nakon objavljivanja.
 
-Iz terminala pokreni skriptu `lokalni-test/PROVERA-PRISTUPA.sh` iz Korak 16 paketa ili ručno otvori sledeće adrese u browseru:
+## Serverski zahtevi
 
-| URL putanja | Očekivanje (Apache) |
+- PHP 8.1+ sa ekstenzijama SimpleXML, libxml, JSON i session.
+- Apache 2.4+ sa omogućenim `.htaccess` pravilima ili odgovarajuća konfiguracija drugog web-servera.
+- HTTPS za javno dostupnu aplikaciju.
+- Dozvola za PHP upis u `config/` i `data/`, bez korišćenja dozvola `777`.
+- Administratorska lozinka postavljena na serveru kao `SUPPLYHUB_ADMIN_PASSWORD` (najmanje 16 znakova). Lozinku ne čuvati u Git repozitorijumu.
+
+## Datoteke za objavljivanje
+
+Na server se postavljaju:
+
+```text
+supplyhub/
+├── .htaccess
+├── index.php
+├── download.php
+├── save-settings.php
+├── assets/
+├── includes/          # PHP obrada i zaštitni .htaccess
+├── config/            # settings.json i zaštitni .htaccess
+└── data/              # tri ulazna XML kataloga, izvoz.xml i .htaccess
+```
+
+Razvojni direktorijumi `dev/` i `tests/`, `.git/`, lokalni logovi i privremene datoteke ne postavljaju se na javni server. Na Apache serveru interni direktorijumi su zaštićeni pravilima u svojim `.htaccess` datotekama. Za Nginx je neophodno zasebno podesiti ekvivalentna pravila.
+
+## Provera nakon objavljivanja
+
+Sledeće putanje odnose se na osnovni URL aplikacije (npr. `/supplyhub/`):
+
+| Putanja | Očekivani odgovor |
 |---|---|
-| `/supplier-dashboard/` | 200 — dashboard (52 proizvoda uz početne marže) |
-| `/supplier-dashboard/download.php` | 200 — preuzimanje `izvoz.xml` |
-| `/supplier-dashboard/save-settings.php` | 405 — GET nije dozvoljen |
-| `/supplier-dashboard/config/settings.json` | 403 — zabranjeno |
-| `/supplier-dashboard/data/izvoz.xml` | 403 — zabranjeno direktno otvaranje |
-| `/supplier-dashboard/includes/products.php` | 403 — zabranjeno |
-| `/supplier-dashboard/dev/check-xml.php` | 403 — privremeno blokirano (ako `dev/` postoji) |
+| `/` | 200 — prikaz dashboarda |
+| `/download.php` | 200 — preuzimanje `izvoz.xml` |
+| `/save-settings.php` (GET) | 405 — metod nije dozvoljen |
+| `/config/settings.json` | 403 — pristup zabranjen |
+| `/data/izvoz.xml` | 403 — direktan pristup zabranjen |
+| `/includes/products.php` | 403 — pristup zabranjen |
 
-Za stranice koje su uklonjene (npr. `dev/` u produkciji), 404 je takođe prihvatljiv. Ako je bilo koja interna datoteka dostupna sa HTTP 200, **ne objavljuj aplikaciju dok to ne rešiš**.
+Proveriti učitavanje kataloga, pretragu po nazivu i EAN-u, filter dobavljača, paginaciju i preuzimanje XML-a. Pri početnim parametrima (**Alfa 5%, Beta 7%, Gama 0%, PDV 20%**) katalog sadrži **52 jedinstvena proizvoda**.
 
-U dashboardu potvrdi pretragu naziva i EAN-a, kombinovani filter dobavljača, stranicu 2 paginacije, preuzimanje XML-a, kao i promenu Gama marže 0 → 10 → 0 uz trajno čuvanje i ponovni obračun. Git commit ide tek posle testiranja.
+Za proveru obračuna privremeno promeniti maržu kroz panel i sačuvati podešavanja uz administratorsku lozinku. Potvrditi promenu cena i ponovno generisanje `data/izvoz.xml`, zatim vratiti početne parametre. Zahtev sa pogrešnom lozinkom ne sme izmeniti podešavanja.
 
-## 2. Bezbedan produkcioni paket
+## Napomene o pristupu
 
-Ne otpremati `dev/`, `tests/`, `.git/`, lokalne logove, skrinšotove i privremene fajlove. Upload samo potrebnih PHP/HTML/CSS/JS i XML fajlova. **Ne brisati** tri ulazna XML fajla, `data/izvoz.xml`, `config/settings.json` ili interne `.htaccess` zaštite.
+`data/izvoz.xml` nije direktno dostupan preko URL-a; aplikacija ga isporučuje kroz `download.php`. Pošto izvozni katalog sadrži i nabavne cene, pristup preuzimanju treba dodatno ograničiti ako ti podaci nisu namenjeni javnom prikazu.
 
-Ako koristiš Apache 2.4, proveri da hosting prihvata `.htaccess` pravila (`AllowOverride` podešavanje). Ako koristi Nginx, samostalno pripremi Nginx pravila ili stavi interne fajlove izvan javnog `document root` foldera. Koristi HTTPS sertifikat.
-
-PHP ekstenzije: SimpleXML, libxml, JSON, session; PHP >= 8.1. PHP procesu daj pravo upisa u `config/` i `data/`, bez `777`.
-
-**Na javnom serveru `save-settings.php` ne dozvoljava promenu bez HTTPS i jake administratorske lozinke u env promenljivoj `SUPPLYHUB_ADMIN_PASSWORD`.** Lozinku postavi kroz server/hosting konfiguraciju **van Git repozitorijuma**. Ako hosting ne omogućava bezbedno postavljanje environment promenljive, nemoj zaobilaziti proveru; upotrebi odgovarajući hosting ili zatraži administrativnu konfiguraciju servera.
-
-Ako je HTTPS iza reverse proxy-ja, treba ispravno proslediti HTTPS stanje PHP aplikaciji; ne isključuj sigurnosnu proveru.
-
-## 3. Provere nakon objave
-
-1. Otvori javni link sa telefona i desktopa. Proveri da ne prikazuje PHP greške.
-2. Otvori `download.php` i proveri da preuzima `izvoz.xml` sa 52 stavke (pri početnim maržama).
-3. Testiraj direktne putanje iz gornje tabele na **javnom domenu** (bez prijave): konfiguracija i interna obrada nikad ne smeju biti dostupne.
-4. Potvrdi da su marže/PDV podesive na serveru preko HTTPS i lozinke. Testiraj odjavu/ponovno učitavanje.
-5. Proveri da javni URL ostane aktivan najmanje 14 dana nakon predaje. Ne oslanjaj se na GitHub Pages — PHP ne izvršava na GitHub Pages.
-
-## 4. Predaja poslodavcu
-
-Mejl treba da sadrži: **javni URL aplikacije, URL GitHub repozitorijuma / pristup privatnom repozitorijumu, kratko uputstvo za lokalni start, i napomenu gde se nalazi `data/izvoz.xml`**. Proveri da je poslednji commit poslat (`Push origin` → `Fetch origin`). Nije dovoljno da GitHub sadrži samo kod: aplikacija mora raditi na PHP hostingu.
+Javni demo biće dostupan najmanje 14 dana nakon predaje. GitHub Pages nije odgovarajući hosting za ovaj projekat jer ne izvršava PHP.
