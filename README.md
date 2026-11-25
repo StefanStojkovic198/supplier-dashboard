@@ -74,6 +74,13 @@ Linkovi za slike iz ulaznih XML kataloga vode ka `picsum.photos` (ilustrativne/t
 
 ## Priprema za produkciju / predaja
 
-Detaljan postupak i kontrolni testovi su u [DEPLOYMENT.md](DEPLOYMENT.md).
+Detaljna uputstva za postavljanje aplikacije na hosting i proveru funkcionalnosti nalaze se u fajlu [DEPLOYMENT.md](DEPLOYMENT.md).
 
-**Predaja:** link ka javno dostupnoj PHP aplikaciji, Git repozitorijum sa istorijom promena, README sa lokalnim koracima i generisani `data/izvoz.xml`. Aplikacija treba da ostane dostupna najmanje **14 dana od predaje**.
+**Za predaju projekta pripremio sam:**
+
+- GitHub repozitorijum sa istorijom izmena.
+- PHP aplikaciju dostupnu preko javnog linka.
+- README sa uputstvom za lokalno pokretanje.
+- Generisani `data/izvoz.xml` sa obrađenim proizvodima.
+
+Demo aplikacija će biti dostupna najmanje **14 dana nakon predaje zadatka**.
