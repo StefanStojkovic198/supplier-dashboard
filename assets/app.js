@@ -34,6 +34,8 @@ function safeImageUrl(value) {
   if (typeof value !== 'string') return null;
   try {
     const url = new URL(value);
+    // Prikaži izvorni URL iz dobavljačkog XML-a, uključujući demo Picsum slike.
+    // Ikonica kategorije ostaje kao rezervni prikaz ako slika ne može da se učita.
     return ['https:', 'http:'].includes(url.protocol) ? url.href : null;
   } catch (_) { return null; }
 }
@@ -60,6 +62,31 @@ function productThumb(product) {
     `<img class="product-image" alt="" loading="lazy" src="${safeText(image)}">` : ''}</div>`;
 }
 
+// Kompaktna paginacija: prikaz "trenutna / ukupno" i strelice.
+// Stanje se računa iz trenutno filtriranog kataloga — bez izmene podataka.
+const pageNumbers = document.getElementById('pageNumbers');
+
+function renderPagination(totalPages) {
+  const current = document.createElement('span');
+  current.className = 'pager-current';
+  current.textContent = String(state.page);
+  current.setAttribute('aria-current', 'page');
+
+  const slash = document.createElement('span');
+  slash.className = 'pager-separator';
+  slash.textContent = '/';
+  slash.setAttribute('aria-hidden', 'true');
+
+  const total = document.createElement('span');
+  total.className = 'pager-total';
+  total.textContent = String(totalPages);
+
+  pageNumbers.replaceChildren(current, slash, total);
+  pageNumbers.setAttribute('aria-label', `Stranica ${state.page} od ${totalPages}`);
+  document.getElementById('prevPage').disabled = state.page <= 1;
+  document.getElementById('nextPage').disabled = state.page >= totalPages;
+}
+
 function render() {
   const filtered = catalog.filter(p =>
     (!state.search || `${p.name} ${p.ean}`.toLocaleLowerCase('sr').includes(state.search)) &&
@@ -74,6 +101,7 @@ function render() {
   document.getElementById('metricProfit').textContent = serverError ? '—' : money(Math.round(catalog.reduce((sum, p) => sum + p.profitCents, 0) / Math.max(1, catalog.length)));
   document.getElementById('metricStock').textContent = serverError ? '—' : number(catalog.reduce((sum, p) => sum + p.stock, 0));
   document.getElementById('tableCount').textContent = `${number(filtered.length)} proizvoda`;
+  document.getElementById('clearFiltersButton').hidden = !state.search && !state.supplier;
   document.getElementById('navCount').textContent = number(catalog.length);
 
   document.getElementById('productRows').innerHTML = visible.map(p =>
@@ -102,9 +130,7 @@ function render() {
   document.getElementById('paginationInfo').textContent = filtered.length
     ? `Prikazano ${number((state.page - 1) * state.pageSize + 1)}–${number(Math.min(state.page * state.pageSize, filtered.length))} od ${number(filtered.length)}`
     : 'Prikazano 0 proizvoda';
-  document.getElementById('pageNumber').textContent = state.page;
-  document.getElementById('prevPage').disabled = state.page <= 1;
-  document.getElementById('nextPage').disabled = state.page >= pages;
+  renderPagination(pages);
 
   document.getElementById('supplierDistribution').innerHTML = Object.entries(names).map(([id, label]) => {
     const count = catalog.filter(p => p.supplier === id).length;
@@ -143,6 +169,15 @@ document.getElementById('supplierFilter').addEventListener('change', e => {
 document.getElementById('prevPage').addEventListener('click', () => { state.page--; render(); });
 document.getElementById('nextPage').addEventListener('click', () => { state.page++; render(); });
 
+document.getElementById('clearFiltersButton').addEventListener('click', () => {
+  state.search = '';
+  state.supplier = '';
+  state.page = 1;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('supplierFilter').value = '';
+  render();
+});
+
 function downloadXml() {
   if (serverError) {
     toast('XML fajl nije spreman za preuzimanje.');
@@ -153,7 +188,6 @@ function downloadXml() {
 document.getElementById('exportButton').addEventListener('click', downloadXml);
 document.getElementById('sidebarExport').addEventListener('click', downloadXml);
 document.getElementById('refreshButton').addEventListener('click', () => window.location.reload());
-document.getElementById('helpButton').addEventListener('click', () => toast('Prikaz iz data/izvoz.xml. Obračun i izbor dobavljača obavljeni su na PHP serveru.'));
 
 // Stvarni POST ka PHP serveru: nema izračunavanja cena u JavaScript-u.
 const modal = document.getElementById('settingsOverlay');

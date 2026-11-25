@@ -148,20 +148,22 @@ $payload = json_encode(
 
       </nav>
 
-      <div class="sidebar-bottom"><div class="support-box"><div class="support-icon"><svg class="icon"><use href="#i-code"/></svg></div><strong>Pregled projekta</strong><p>Prikaz sačuvanog izvoz.xml. Obrada i obračun cena izvršeni su na PHP serveru.</p></div></div>
-
-      <div class="sidebar-foot"><div class="avatar">SH</div><div><div class="profile-name">SupplyHub operater</div><div class="profile-role">XML katalog</div></div></div>
+      <div class="sidebar-foot"><span class="sidebar-status-dot<?= $catalogError !== null ? ' error' : '' ?>" aria-hidden="true"></span><div><div class="profile-name"><?= $catalogError === null ? 'XML katalog' : 'Proveri XML katalog' ?></div><div class="profile-role">PHP obračun · SupplyHub</div></div></div>
 
     </aside>
 
     <main class="main">
 
-      <header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="circle-btn mobile-menu" id="menuToggle" aria-label="Otvori navigaciju" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button><div class="crumb">Radni prostor <svg class="icon"><use href="#i-chevron"/></svg> <strong>Proizvodi</strong></div></div><div class="top-right"><span class="env"><span class="dot"></span> XML KATALOG</span><button class="circle-btn" id="helpButton" aria-label="Informacije o demo prikazu"><svg class="icon"><use href="#i-info"/></svg></button><div class="top-avatar">AD</div></div></header>
+      <header class="topbar">
+        <div class="topbar-left"><button class="circle-btn mobile-menu" id="menuToggle" aria-label="Otvori navigaciju" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button><div class="crumb"><span>Radni prostor</span><svg class="icon"><use href="#i-chevron"/></svg><strong>Katalog proizvoda</strong></div></div>
+        <div class="top-right"><span class="env"><span class="dot"></span> XML KATALOG</span></div>
+      </header>
 
       <div class="container">
         <div id="catalogError" class="catalog-error" role="alert" hidden></div>
 
-        <section id="overviewSection"><div class="eyebrow"><svg class="icon"><use href="#i-grid"/></svg> CENTRALIZOVANI KATALOG</div><div class="pageheading"><div><h1>Upravljanje proizvodima</h1><p class="subtitle">Sve ponude dobavljača, cene i stanje lagera na jednom mestu.</p></div><div class="actions"><button class="btn" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg>Osveži podatke</button><button class="btn btn-primary" id="exportButton"><svg class="icon"><use href="#i-download"/></svg>Preuzmi XML</button></div></div>
+        <section id="overviewSection" class="overview-section">
+          <div class="hero"><div class="hero-main"><div class="eyebrow"><span class="eyebrow-mark"></span> SUPPLYHUB / CENTRALIZOVANI KATALOG</div><h1>Upravljanje <span>proizvodima.</span></h1><p class="subtitle">Sve ponude dobavljača, jedna najbolja cena za svaki EAN. Pregled, obračun i izvoz na jednom mestu.</p><div class="hero-proof"><span class="proof-dot"></span> Podaci iz generisanog XML kataloga <span class="proof-divider"></span> Obračun na PHP serveru</div></div><div class="actions"><button class="btn" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg>Osveži podatke</button><button class="btn btn-primary" id="exportButton"><svg class="icon"><use href="#i-download"/></svg>Preuzmi XML</button></div></div>
 
           <div class="overview">
 
@@ -177,29 +179,27 @@ $payload = json_encode(
 
         </section>
 
-        <div class="content-grid">
+        <div class="workspace">
 
-          <section class="panel" id="productsSection"><div class="panel-head"><div><h2 class="panel-title">Katalog proizvoda</h2><p class="panel-subtitle">Za svaki EAN prikazuje se dobavljač sa najnižom prodajnom cenom.</p></div><span class="small-tag" id="tableCount">— proizvoda</span></div>
+          <section class="panel suppliers-overview" id="suppliersSection">
+            <div class="suppliers-summary"><div class="table-eyebrow">PREGLED MREŽE</div><h2 class="side-title">Dobavljači u katalogu</h2><p class="side-desc">Udeo dobavljača u odabranim ponudama.</p></div>
+            <div id="supplierDistribution" class="supplier-list"></div>
+            <div class="supplier-foot"><strong id="supplierFootCount">— aktivna</strong><span>dobavljača</span></div>
+          </section>
 
-            <div class="toolbar"><label class="search"><svg class="icon"><use href="#i-search"/></svg><input id="searchInput" type="search" placeholder="Pretraži naziv ili EAN kod..." aria-label="Pretraga proizvoda"></label><div class="select-wrap"><select id="supplierFilter" aria-label="Filter dobavljača"><option value="">Svi dobavljači</option><option value="alfa">Alfa Distribucija</option><option value="beta">Beta Trade</option><option value="gama">Gama Import</option></select><svg class="icon"><use href="#i-down"/></svg></div></div>
+          <section class="panel catalog-panel" id="productsSection"><div class="panel-head"><div><div class="table-eyebrow">OBJEDINJENI REZULTATI</div><h2 class="panel-title">Katalog proizvoda</h2><p class="panel-subtitle">Najpovoljnija ponuda po EAN-u, sa obračunatom prodajnom cenom i dostupnim lagerom.</p></div><span class="small-tag" id="tableCount">— proizvoda</span></div>
+
+            <div class="toolbar"><label class="search"><svg class="icon"><use href="#i-search"/></svg><input id="searchInput" type="search" placeholder="Pretraži naziv ili EAN kod..." aria-label="Pretraga proizvoda"></label><div class="select-wrap"><select id="supplierFilter" aria-label="Filter dobavljača"><option value="">Svi dobavljači</option><option value="alfa">Alfa Distribucija</option><option value="beta">Beta Trade</option><option value="gama">Gama Import</option></select><svg class="icon"><use href="#i-down"/></svg></div><button class="filter-reset" id="clearFiltersButton" type="button" hidden>Očisti filtere <svg class="icon"><use href="#i-x"/></svg></button></div>
 
             <div class="table-wrap"><table class="products"><thead><tr><th>SLIKA</th><th>NAZIV</th><th>EAN KOD</th><th>DOBAVLJAČ</th><th>NABAVNA</th><th>PRODAJNA</th><th>ZARADA</th><th>LAGER</th></tr></thead><tbody id="productRows"></tbody></table><div id="emptyState" class="empty-state" hidden><strong>Nema rezultata</strong>Promeni upit ili izaberi drugog dobavljača.</div></div>
 
-            <div class="table-footer"><div id="paginationInfo">Prikazano 0 proizvoda</div><div class="pager"><button class="page-btn" id="prevPage" aria-label="Prethodna strana"><svg class="icon" style="transform:rotate(180deg);width:15px;height:15px"><use href="#i-chevron"/></svg></button><span class="page-btn active" id="pageNumber">1</span><button class="page-btn" id="nextPage" aria-label="Sledeća strana"><svg class="icon" style="width:15px;height:15px"><use href="#i-chevron"/></svg></button></div></div>
+            <div class="table-footer"><div id="paginationInfo">Prikazano 0 proizvoda</div><nav class="pager" aria-label="Stranice kataloga"><button type="button" class="page-btn page-arrow" id="prevPage" aria-label="Prethodna stranica"><svg class="icon" style="transform:rotate(180deg);width:15px;height:15px"><use href="#i-chevron"/></svg></button><div id="pageNumbers" class="page-numbers" aria-label="Brojevi stranica"></div><button type="button" class="page-btn page-arrow" id="nextPage" aria-label="Sledeća stranica"><svg class="icon" style="width:15px;height:15px"><use href="#i-chevron"/></svg></button></nav></div>
 
           </section>
 
-          <div class="side-stack">
-
-            <section class="panel side-panel" id="suppliersSection"><h2 class="side-title">Pregled dobavljača</h2><p class="side-desc">Zastupljenost u objedinjenom katalogu.</p><div id="supplierDistribution" class="supplier-list"></div><div class="supplier-foot"><span>Ukupno dobavljača</span><strong id="supplierFootCount">— aktivna</strong></div></section>
-
-            <section class="panel side-panel formula-panel"><div class="formula-icon"><svg class="icon"><use href="#i-calculator"/></svg></div><h2 class="side-title">Pametan obračun cena</h2><p class="side-desc">Prodajna cena se formira automatski na osnovu marže dobavljača i PDV-a.</p><div class="formula-rule"><strong>Nabavna cena × (1 + marža) × (1 + PDV)</strong><small>Najpovoljnija prodajna ponuda po EAN-u</small></div><div class="formula-note">Marže i PDV čuvaju se na serveru. Promena automatski ažurira cene, dobavljače i XML izvoz.</div></section>
-
-          </div>
-
         </div>
 
-        <footer class="bottom-caption"><span>© 2026 SupplyHub — Katalog proizvoda iz XML izvoza.</span><span><b>Izvor:</b> data/izvoz.xml · Cene obračunate na serveru.</span></footer>
+        <footer class="bottom-caption"><span>© 2026 SupplyHub · Product Intelligence</span><span><span class="foot-dot"></span> PHP obračun · XML katalog</span></footer>
 
       </div>
 
