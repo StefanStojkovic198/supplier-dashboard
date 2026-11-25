@@ -1,3 +1,32 @@
+<?php
+/** Dashboard učitava prethodno generisani izvoz.xml. XML obrada i obračun ostaju u PHP modulima. */
+declare(strict_types=1);
+require_once __DIR__ . '/includes/catalog.php';
+require_once __DIR__ . '/includes/pricing.php';
+
+$catalogError = null;
+$catalogProducts = [];
+$publicRates = null;
+try {
+    $catalogProducts = supplyhub_read_export_catalog(__DIR__ . '/data/izvoz.xml');
+    $pricingSettings = supplyhub_load_pricing_config(__DIR__ . '/config/settings.json');
+    $publicRates = [
+        'margins' => [
+            'alfa' => $pricingSettings['margins']['alfa'] / 100,
+            'beta' => $pricingSettings['margins']['beta'] / 100,
+            'gama' => $pricingSettings['margins']['gama'] / 100,
+        ],
+        'vat' => $pricingSettings['vat'] / 100,
+    ];
+} catch (Throwable $error) {
+    $catalogError = $error->getMessage();
+}
+
+$payload = json_encode(
+    ['products' => $catalogProducts, 'rates' => $publicRates, 'error' => $catalogError],
+    JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR
+);
+?>
 <!DOCTYPE html>
 
 <html lang="sr">
@@ -10,7 +39,7 @@
 
   <meta name="theme-color" content="#0b1220">
 
-  <meta name="description" content="Demo dizajna aplikacije za objedinjavanje ponuda dobavljača.">
+  <meta name="description" content="Katalog proizvoda objedinjen iz XML ponuda dobavljača.">
 
   <title>SupplyHub — Pregled proizvoda</title>
 
@@ -20,7 +49,7 @@
 
 <body>
 
-  <!-- Tamna tema demo dashboarda; XML obrada i poslovna logika biće povezane sa PHP backendom. -->
+  <!-- Tamna tema dashboarda; podaci se čitaju iz stvarnog izvoz.xml preko PHP-a. -->
 
   <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
 
@@ -94,7 +123,7 @@
 
         <button class="nav-button" data-scroll="overviewSection"><svg class="icon"><use href="#i-grid"/></svg>Kontrolna tabla</button>
 
-        <button class="nav-button active" data-scroll="productsSection"><svg class="icon"><use href="#i-box"/></svg>Proizvodi<span class="nav-count" id="navCount">10</span></button>
+        <button class="nav-button active" data-scroll="productsSection"><svg class="icon"><use href="#i-box"/></svg>Proizvodi<span class="nav-count" id="navCount">—</span></button>
 
         <button class="nav-button" data-scroll="suppliersSection"><svg class="icon"><use href="#i-truck"/></svg>Dobavljači</button>
 
@@ -106,17 +135,18 @@
 
       </nav>
 
-      <div class="sidebar-bottom"><div class="support-box"><div class="support-icon"><svg class="icon"><use href="#i-code"/></svg></div><strong>Pregled projekta</strong><p>Početna verzija interfejsa. Obrada XML datoteka biće povezana u backend fazi.</p></div></div>
+      <div class="sidebar-bottom"><div class="support-box"><div class="support-icon"><svg class="icon"><use href="#i-code"/></svg></div><strong>Pregled projekta</strong><p>Prikaz sačuvanog izvoz.xml. Obrada i obračun cena izvršeni su na PHP serveru.</p></div></div>
 
-      <div class="sidebar-foot"><div class="avatar">SH</div><div><div class="profile-name">Demo administrator</div><div class="profile-role">Pregled dizajna</div></div></div>
+      <div class="sidebar-foot"><div class="avatar">SH</div><div><div class="profile-name">SupplyHub operater</div><div class="profile-role">XML katalog</div></div></div>
 
     </aside>
 
     <main class="main">
 
-      <header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="circle-btn mobile-menu" id="menuToggle" aria-label="Otvori navigaciju" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button><div class="crumb">Radni prostor <svg class="icon"><use href="#i-chevron"/></svg> <strong>Proizvodi</strong></div></div><div class="top-right"><span class="env"><span class="dot"></span> DEMO PRIKAZ</span><button class="circle-btn" id="helpButton" aria-label="Informacije o demo prikazu"><svg class="icon"><use href="#i-info"/></svg></button><div class="top-avatar">AD</div></div></header>
+      <header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="circle-btn mobile-menu" id="menuToggle" aria-label="Otvori navigaciju" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button><div class="crumb">Radni prostor <svg class="icon"><use href="#i-chevron"/></svg> <strong>Proizvodi</strong></div></div><div class="top-right"><span class="env"><span class="dot"></span> XML KATALOG</span><button class="circle-btn" id="helpButton" aria-label="Informacije o demo prikazu"><svg class="icon"><use href="#i-info"/></svg></button><div class="top-avatar">AD</div></div></header>
 
       <div class="container">
+        <div id="catalogError" class="catalog-error" role="alert" hidden></div>
 
         <section id="overviewSection"><div class="eyebrow"><svg class="icon"><use href="#i-grid"/></svg> CENTRALIZOVANI KATALOG</div><div class="pageheading"><div><h1>Upravljanje proizvodima</h1><p class="subtitle">Sve ponude dobavljača, cene i stanje lagera na jednom mestu.</p></div><div class="actions"><button class="btn" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg>Osveži podatke</button><button class="btn btn-primary" id="exportButton"><svg class="icon"><use href="#i-download"/></svg>Preuzmi XML</button></div></div>
 
@@ -126,7 +156,7 @@
 
             <article class="stat"><div class="stat-top"><div class="stat-label">Aktivni dobavljači</div><div class="stat-icon mint"><svg class="icon"><use href="#i-truck"/></svg></div></div><div class="stat-num" id="metricSuppliers">3</div><div class="stat-bottom">Alfa · Beta · Gama</div></article>
 
-            <article class="stat"><div class="stat-top"><div class="stat-label">Prosečna zarada / kom</div><div class="stat-icon violet"><svg class="icon"><use href="#i-chart"/></svg></div></div><div class="stat-num" id="metricProfit">—</div><div class="stat-bottom">Bez PDV-a, na demo podacima</div></article>
+            <article class="stat"><div class="stat-top"><div class="stat-label">Prosečna zarada / kom</div><div class="stat-icon violet"><svg class="icon"><use href="#i-chart"/></svg></div></div><div class="stat-num" id="metricProfit">—</div><div class="stat-bottom">Bez PDV-a, iz generisanog XML-a</div></article>
 
             <article class="stat"><div class="stat-top"><div class="stat-label">Ukupan lager</div><div class="stat-icon amber"><svg class="icon"><use href="#i-grid"/></svg></div></div><div class="stat-num" id="metricStock">—</div><div class="stat-bottom">Ukupno jedinica u katalogu</div></article>
 
@@ -140,7 +170,7 @@
 
             <div class="toolbar"><label class="search"><svg class="icon"><use href="#i-search"/></svg><input id="searchInput" type="search" placeholder="Pretraži naziv ili EAN kod..." aria-label="Pretraga proizvoda"></label><div class="select-wrap"><select id="supplierFilter" aria-label="Filter dobavljača"><option value="">Svi dobavljači</option><option value="alfa">Alfa Distribucija</option><option value="beta">Beta Trade</option><option value="gama">Gama Import</option></select><svg class="icon"><use href="#i-down"/></svg></div></div>
 
-            <div class="table-wrap"><table class="products"><thead><tr><th>PROIZVOD</th><th>EAN KOD</th><th>DOBAVLJAČ</th><th>NABAVNA</th><th>PRODAJNA</th><th>ZARADA</th><th>LAGER</th></tr></thead><tbody id="productRows"></tbody></table><div id="emptyState" class="empty-state" hidden><strong>Nema rezultata</strong>Promeni upit ili izaberi drugog dobavljača.</div></div>
+            <div class="table-wrap"><table class="products"><thead><tr><th>SLIKA</th><th>NAZIV</th><th>EAN KOD</th><th>DOBAVLJAČ</th><th>NABAVNA</th><th>PRODAJNA</th><th>ZARADA</th><th>LAGER</th></tr></thead><tbody id="productRows"></tbody></table><div id="emptyState" class="empty-state" hidden><strong>Nema rezultata</strong>Promeni upit ili izaberi drugog dobavljača.</div></div>
 
             <div class="table-footer"><div id="paginationInfo">Prikazano 0 proizvoda</div><div class="pager"><button class="page-btn" id="prevPage" aria-label="Prethodna strana"><svg class="icon" style="transform:rotate(180deg);width:15px;height:15px"><use href="#i-chevron"/></svg></button><span class="page-btn active" id="pageNumber">1</span><button class="page-btn" id="nextPage" aria-label="Sledeća strana"><svg class="icon" style="width:15px;height:15px"><use href="#i-chevron"/></svg></button></div></div>
 
@@ -148,15 +178,15 @@
 
           <div class="side-stack">
 
-            <section class="panel side-panel" id="suppliersSection"><h2 class="side-title">Pregled dobavljača</h2><p class="side-desc">Zastupljenost u objedinjenom katalogu.</p><div id="supplierDistribution" class="supplier-list"></div><div class="supplier-foot"><span>Ukupno dobavljača</span><strong>03 aktivna</strong></div></section>
+            <section class="panel side-panel" id="suppliersSection"><h2 class="side-title">Pregled dobavljača</h2><p class="side-desc">Zastupljenost u objedinjenom katalogu.</p><div id="supplierDistribution" class="supplier-list"></div><div class="supplier-foot"><span>Ukupno dobavljača</span><strong id="supplierFootCount">— aktivna</strong></div></section>
 
-            <section class="panel side-panel formula-panel"><div class="formula-icon"><svg class="icon"><use href="#i-calculator"/></svg></div><h2 class="side-title">Pametan obračun cena</h2><p class="side-desc">Prodajna cena se formira automatski na osnovu marže dobavljača i PDV-a.</p><div class="formula-rule"><strong>Nabavna cena × (1 + marža) × (1 + PDV)</strong><small>Najpovoljnija prodajna ponuda po EAN-u</small></div><div class="formula-note">Marže i stopu PDV-a možeš promeniti u podešavanjima ovog demo prikaza.</div></section>
+            <section class="panel side-panel formula-panel"><div class="formula-icon"><svg class="icon"><use href="#i-calculator"/></svg></div><h2 class="side-title">Pametan obračun cena</h2><p class="side-desc">Prodajna cena se formira automatski na osnovu marže dobavljača i PDV-a.</p><div class="formula-rule"><strong>Nabavna cena × (1 + marža) × (1 + PDV)</strong><small>Najpovoljnija prodajna ponuda po EAN-u</small></div><div class="formula-note">Marže i PDV su iz server konfiguracije. Njihovu izmenu kroz aplikaciju dodajemo u sledećem koraku.</div></section>
 
           </div>
 
         </div>
 
-        <footer class="bottom-caption"><span>© 2026 SupplyHub — Koncept početnog interfejsa.</span><span><b>Napomena:</b> Demo proizvodi su izmišljeni. Nema servera niti stvarnog XML izvoza.</span></footer>
+        <footer class="bottom-caption"><span>© 2026 SupplyHub — Katalog proizvoda iz XML izvoza.</span><span><b>Izvor:</b> data/izvoz.xml · Cene obračunate na serveru.</span></footer>
 
       </div>
 
@@ -166,8 +196,9 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <div class="modal-overlay" id="settingsOverlay" role="presentation"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="modal-title-row"><h2 id="settingsTitle">Podešavanja obračuna</h2><button id="closeSettings" class="circle-btn" aria-label="Zatvori"><svg class="icon"><use href="#i-x"/></svg></button></div><p>Ovo je samo lokalna demonstracija interfejsa. Vrednosti nisu sačuvane na serveru.</p><form id="settingsForm"><div class="field-row"><label for="marginAlfa">Alfa Distribucija — marža (%)</label><input id="marginAlfa" type="number" min="0" max="100" step="0.1" value="5" required></div><div class="field-row"><label for="marginBeta">Beta Trade — marža (%)</label><input id="marginBeta" type="number" min="0" max="100" step="0.1" value="7" required></div><div class="field-row"><label for="marginGama">Gama Import — marža (%)</label><input id="marginGama" type="number" min="0" max="100" step="0.1" value="0" required></div><div class="field-row"><label for="vatRate">PDV (%)</label><input id="vatRate" type="number" min="0" max="100" step="0.1" value="20" required></div><div class="modal-actions"><button type="button" class="btn" id="cancelSettings">Otkaži</button><button type="submit" class="btn btn-primary"><svg class="icon"><use href="#i-check"/></svg>Primeni na demo</button></div></form></div></div>
+  <div class="modal-overlay" id="settingsOverlay" role="presentation"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="modal-title-row"><h2 id="settingsTitle">Podešavanja obračuna</h2><button id="closeSettings" class="circle-btn" aria-label="Zatvori"><svg class="icon"><use href="#i-x"/></svg></button></div><p>Trenutne marže i PDV učitavaju se sa servera. U sledećoj fazi dodaćemo bezbedno menjanje i ponovno generisanje XML-a.</p><form id="settingsForm"><div class="field-row"><label for="marginAlfa">Alfa Distribucija — marža (%)</label><input id="marginAlfa" type="number" min="0" max="100" step="0.1" value="5" readonly></div><div class="field-row"><label for="marginBeta">Beta Trade — marža (%)</label><input id="marginBeta" type="number" min="0" max="100" step="0.1" value="7" readonly></div><div class="field-row"><label for="marginGama">Gama Import — marža (%)</label><input id="marginGama" type="number" min="0" max="100" step="0.1" value="0" readonly></div><div class="field-row"><label for="vatRate">PDV (%)</label><input id="vatRate" type="number" min="0" max="100" step="0.1" value="20" readonly></div><div class="modal-actions"><button type="button" class="btn btn-primary" id="cancelSettings">Zatvori</button></div></form></div></div>
 
+  <script type="application/json" id="catalogPayload"><?= $payload ?></script>
   <script src="assets/app.js" defer></script>
 
 </body>
